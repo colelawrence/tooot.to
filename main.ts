@@ -1,10 +1,15 @@
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+/// <reference no-default-lib="true" />
+/// <reference lib="dom" />
+/// <reference lib="dom.iterable" />
+/// <reference lib="dom.asynciterable" />
+/// <reference lib="deno.ns" />
 
-serve((_req) => {
-  return new Response(
-    "Hello World! Currently I'm building this universal Mastodon link router at https://www.twitch.tv/refactorordie",
-    {
-      headers: { "content-type": "text/plain" },
-    }
-  );
-});
+import { start } from "$fresh/server.ts";
+import manifest from "./fresh.gen.ts";
+
+import twindPlugin from "$fresh/plugins/twind.ts";
+import twindConfig from "./twind.config.ts";
+
+await start(manifest, { plugins: [
+  twindPlugin(twindConfig),
+] });
