@@ -15,7 +15,7 @@ export default function PickAServer(props: PickAServerProps) {
         <div>
           {launchButtonContainerJSX(props, props.previousServerUsed)}
           <details>
-            <summary class="font-bold text-base">Other common server</summary>
+            <summary class="font-bold text-base">Other common servers</summary>
             <div
               style={{
                 // fix gaps between inline blocks

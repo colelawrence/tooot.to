@@ -65,7 +65,16 @@ function isProbablyServerName(x: unknown): x is string {
 export default function Handoff(props: PageProps<RenderData>) {
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
-      <h1 class="text-black text-4xl font-bold">Tooot.to</h1>
+      <div>
+        <h1 class="text-black text-4xl font-bold">Tooot.to</h1>
+        <p class="mt-2">
+          Tooot.to helps you link to things on your own server made by{" "}
+          <a class="text-blue-400" href={props.url.origin + "/@colel@hachyderm.io"}>
+            @colel@hachyderm.io
+          </a>
+          .
+        </p>
+      </div>
       <div class="flex flex-col gap-10">
         <div class="relative w-80">
           <PickAServer

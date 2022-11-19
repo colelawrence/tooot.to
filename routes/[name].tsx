@@ -49,7 +49,15 @@ export const handler: Handlers = {
       const whereToMatch = /^[^\/]+\/\/[^\/]+\/(.+)$/.exec(req.url);
       if (whereToMatch) {
         const serverDestination = whereToMatch[1];
-        headers.set("Location", `https://${value}/web/${serverDestination}`);
+        // e.g. @hachyderm.io
+        const atSamePlaceEnding = "@" + value
+        // e.g. @colel@hachyderm.io
+        if (serverDestination.endsWith(atSamePlaceEnding)) {
+          const localDestination = serverDestination.slice(0, -1 * atSamePlaceEnding.length)
+          headers.set("Location", `https://${value}/${localDestination}`);
+        } else {
+          headers.set("Location", `https://${value}/web/${serverDestination}`);
+        }
       }
     }
     return new Response(null, {
