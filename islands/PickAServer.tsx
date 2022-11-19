@@ -2,7 +2,7 @@ import ServerLaunchButton from "../components/ServerLaunchButton.tsx";
 import servers from "../SERVERS.gen.json" assert { type: "json" };
 
 interface PickAServerProps {
-  destination: string;
+  cta?: string,
   previousServerUsed?: string | undefined;
   recommendedServers: string[];
 }
@@ -10,7 +10,7 @@ interface PickAServerProps {
 export default function PickAServer(props: PickAServerProps) {
   return (
     <div class="flex flex-col gap-2">
-      <h3 class="font-bold text-base">Open in</h3>
+      <h3 class="font-bold text-base">{props.cta ?? "Open in"}</h3>
       {props.previousServerUsed ? (
         <div>
           {launchButtonContainerJSX(props, props.previousServerUsed)}

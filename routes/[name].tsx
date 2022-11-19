@@ -76,7 +76,6 @@ export default function Handoff(props: PageProps<RenderData>) {
         <div class="p-2 bg-gray-100">{to}</div>
         <div class="relative w-80">
           <PickAServer
-            destination={to}
             recommendedServers={props.data.recommendedServers}
             previousServerUsed={props.data.preferredServer}
           />
