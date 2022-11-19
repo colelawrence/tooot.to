@@ -1,0 +1,3 @@
+[submodule "ref/mastodon"]
+	path = ref/mastodon
+	url = https://github.com/mastodon/mastodon.git
