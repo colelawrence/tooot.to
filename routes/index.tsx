@@ -1,10 +1,9 @@
 import { PageProps } from "$fresh/server.ts";
 import PickAServer from "../islands/PickAServer.tsx";
 import { HandlerContext, Handlers } from "$fresh/server.ts";
-import {
-  getCookies,
-  setCookie,
-} from "https://deno.land/std@0.165.0/http/cookie.ts";
+import { getCookies } from "https://deno.land/std@0.165.0/http/cookie.ts";
+import { setPrefCookie } from "./setPrefCookie.tsx";
+import { isProbablyServerName } from "./isProbablyServerName.tsx";
 
 type RenderData = {
   preferredServer?: string | undefined;
@@ -41,12 +40,7 @@ export const handler: Handlers = {
       Location: req.url,
     });
     if (isProbablyServerName(value)) {
-      setCookie(headers, {
-        name: "Pref",
-        value: value,
-        sameSite: "Strict",
-        httpOnly: true,
-      });
+      setPrefCookie(headers, value);
     }
     return new Response(null, {
       status: 302,
@@ -55,13 +49,6 @@ export const handler: Handlers = {
   },
 };
 
-function isProbablyServerName(x: unknown): x is string {
-  if (typeof x !== "string") return false;
-  // at least 3 chars & has no spaces, forward slashes or ?
-  if (x.length < 3 || /[ \/\?]/.test(x)) return false;
-  return /[^\.]\.[^\.]/.test(x);
-}
-
 export default function Handoff(props: PageProps<RenderData>) {
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
@@ -69,7 +56,10 @@ export default function Handoff(props: PageProps<RenderData>) {
         <h1 class="text-black text-4xl font-bold">Tooot.to</h1>
         <p class="mt-2">
           Tooot.to helps you link to things on your own server made by{" "}
-          <a class="text-blue-400" href={props.url.origin + "/@colel@hachyderm.io"}>
+          <a
+            class="text-blue-400"
+            href={props.url.origin + "/@colel@hachyderm.io"}
+          >
             @colel@hachyderm.io
           </a>
           .

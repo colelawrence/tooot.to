@@ -5,6 +5,8 @@ import {
   getCookies,
   setCookie,
 } from "https://deno.land/std@0.165.0/http/cookie.ts";
+import { setPrefCookie } from "./setPrefCookie.tsx";
+import { isProbablyServerName } from "./isProbablyServerName.tsx";
 
 type RenderData = {
   preferredServer?: string | undefined;
@@ -40,20 +42,18 @@ export const handler: Handlers = {
       Location: req.url,
     });
     if (isProbablyServerName(value)) {
-      setCookie(headers, {
-        name: "Pref",
-        value: value,
-        sameSite: "Strict",
-        httpOnly: true,
-      });
+      setPrefCookie(headers, value);
       const whereToMatch = /^[^\/]+\/\/[^\/]+\/(.+)$/.exec(req.url);
       if (whereToMatch) {
         const serverDestination = whereToMatch[1];
         // e.g. @hachyderm.io
-        const atSamePlaceEnding = "@" + value
+        const atSamePlaceEnding = "@" + value;
         // e.g. @colel@hachyderm.io
         if (serverDestination.endsWith(atSamePlaceEnding)) {
-          const localDestination = serverDestination.slice(0, -1 * atSamePlaceEnding.length)
+          const localDestination = serverDestination.slice(
+            0,
+            -1 * atSamePlaceEnding.length
+          );
           headers.set("Location", `https://${value}/${localDestination}`);
         } else {
           headers.set("Location", `https://${value}/web/${serverDestination}`);
@@ -66,13 +66,6 @@ export const handler: Handlers = {
     });
   },
 };
-
-function isProbablyServerName(x: unknown): x is string {
-  if (typeof x !== "string") return false;
-  // at least 3 chars & has no spaces, forward slashes or ?
-  if (x.length < 3 || /[ \/\?]/.test(x)) return false;
-  return /[^\.]\.[^\.]/.test(x);
-}
 
 export default function Handoff(props: PageProps<RenderData>) {
   const to = props.params.name;
