@@ -1,31 +1,33 @@
-import { PageProps } from "$fresh/server.ts";
+import { PageProps, RouteConfig } from "$fresh/server.ts";
 import PickAServer from "../islands/PickAServer.tsx";
 import { HandlerContext, Handlers } from "$fresh/server.ts";
-import {
-  getCookies,
-  setCookie,
-} from "https://deno.land/std@0.165.0/http/cookie.ts";
-import { setPrefCookie } from "./setPrefCookie.tsx";
-import { isProbablyServerName } from "./isProbablyServerName.tsx";
+import { setPrefCookie } from "../shared/setPrefCookie.tsx";
+import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
+import { getToootCookies } from "../shared/getToootCookies.tsx";
+// import { ImagePool } from "npm:@squoosh/lib"
+
+// const pool = new ImagePool(1)
+
+// function createQRCodePNG(options: { url: string }) {
+//   // console.log({ options, pool: 1 });
+//   return png;
+// }
 
 type RenderData = {
   preferredServer?: string | undefined;
   recommendedServers: string[];
 };
 
-type MaybeCookies = {
-  Pref: string | undefined;
-  [other: string]: string | undefined;
+export const config: RouteConfig = {
+  routeOverride: "/:user(@[^\\/]+):hostAndItem(@[^\\/\\.]+\\..+)",
 };
 
 export const handler: Handlers = {
-  async GET(_req: Request, ctx: HandlerContext) {
-    const cookies = getCookies(_req.headers) as MaybeCookies;
+  async GET(req: Request, ctx: HandlerContext) {
+    const cookies = getToootCookies(req.headers);
 
     const renderData: RenderData = {
-      preferredServer: isProbablyServerName(cookies.Pref)
-        ? cookies.Pref
-        : undefined,
+      preferredServer: cookies.preferredServer,
       recommendedServers: [],
     };
 
@@ -68,17 +70,29 @@ export const handler: Handlers = {
 };
 
 export default function Handoff(props: PageProps<RenderData>) {
-  const to = props.params.path;
+  console.log(props.params)
+  const { user, hostAndItem } = props.params;
+  const [host, ...item] = hostAndItem.split("/");
+
+  let to = `${user}${host}`;
+  if (item.length) {
+    to += `/${item.join("/")}`;
+  }
 
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
       <h1 class="text-black text-4xl font-bold">Tooot.to</h1>
       <div class="flex flex-col gap-10">
+        {/* <img
+          src={createQRCodePNG({ url: props.url.toString() })}
+          alt="QR Code to this page"
+        /> */}
         <div class="p-2 bg-gray-100">{to}</div>
         <div class="relative w-80">
           <PickAServer
             recommendedServers={props.data.recommendedServers}
             previousServerUsed={props.data.preferredServer}
+            customServerFormCTA="Go"
           />
         </div>
       </div>

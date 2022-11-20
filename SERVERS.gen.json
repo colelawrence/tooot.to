@@ -1,60 +1,176 @@
-[
- "cloud-native.social",
- "computerfairi.es",
- "convo.casa",
- "corteximplant.com",
- "creators.social",
- "discuss.systems",
- "federated.press",
- "fosstodon.org",
- "glasgow.social",
- "hachyderm.io",
- "home.social",
- "hostux.social",
- "indieweb.social",
- "ioc.exchange",
- "kolektiva.social",
- "learningdisability.social",
- "libretooth.gr",
- "lor.sh",
- "maly.io",
- "masto.ai",
- "mastodon.au",
- "mastodon.ie",
- "mastodon.lol",
- "mastodon.nz",
- "mastodon.pirateparty.be",
- "mastodon.scot",
- "mastodon.sdf.org",
- "mastodon.world",
- "mastodonapp.uk",
- "mathstodon.xyz",
- "mograph.social",
- "mstdn.ca",
- "mstdn.party",
- "newsie.social",
- "noc.social",
- "ohai.social",
- "pettingzoo.co",
- "phpc.social",
- "primarycare.app",
- "ravenation.club",
- "seo.chat",
- "sfba.social",
- "socel.net",
- "social.bau-ha.us",
- "social.coop",
- "social.linux.pizza",
- "social.vivaldi.net",
- "techhub.social",
- "theblower.au",
- "tilde.zone",
- "toolsforthought.rocks",
- "toot.funami.tech",
- "toot.site",
- "toot.wales",
- "uiuxdev.social",
- "union.place",
- "universeodon.com",
- "urbanists.social"
-]
+{
+ "cloud-native.social": {
+  "w100px": 1140
+ },
+ "computerfairi.es": {
+  "w100px": 960
+ },
+ "convo.casa": {
+  "w100px": 600
+ },
+ "corteximplant.com": {
+  "w100px": 1020
+ },
+ "creators.social": {
+  "w100px": 900
+ },
+ "discuss.systems": {
+  "w100px": 900
+ },
+ "federated.press": {
+  "w100px": 900
+ },
+ "fosstodon.org": {
+  "w100px": 780
+ },
+ "glasgow.social": {
+  "w100px": 840
+ },
+ "hachyderm.io": {
+  "w100px": 720
+ },
+ "home.social": {
+  "w100px": 660
+ },
+ "hostux.social": {
+  "w100px": 780
+ },
+ "indieweb.social": {
+  "w100px": 900
+ },
+ "ioc.exchange": {
+  "w100px": 720
+ },
+ "kolektiva.social": {
+  "w100px": 960
+ },
+ "learningdisability.social": {
+  "w100px": 1500
+ },
+ "libretooth.gr": {
+  "w100px": 780
+ },
+ "lor.sh": {
+  "w100px": 360
+ },
+ "maly.io": {
+  "w100px": 420
+ },
+ "masto.ai": {
+  "w100px": 480
+ },
+ "mastodon.au": {
+  "w100px": 660
+ },
+ "mastodon.ie": {
+  "w100px": 660
+ },
+ "mastodon.lol": {
+  "w100px": 720
+ },
+ "mastodon.nz": {
+  "w100px": 660
+ },
+ "mastodon.pirateparty.be": {
+  "w100px": 1380
+ },
+ "mastodon.scot": {
+  "w100px": 780
+ },
+ "mastodon.sdf.org": {
+  "w100px": 960
+ },
+ "mastodon.world": {
+  "w100px": 840
+ },
+ "mastodonapp.uk": {
+  "w100px": 840
+ },
+ "mathstodon.xyz": {
+  "w100px": 840
+ },
+ "mograph.social": {
+  "w100px": 840
+ },
+ "mstdn.ca": {
+  "w100px": 480
+ },
+ "mstdn.party": {
+  "w100px": 660
+ },
+ "newsie.social": {
+  "w100px": 780
+ },
+ "noc.social": {
+  "w100px": 600
+ },
+ "ohai.social": {
+  "w100px": 660
+ },
+ "pettingzoo.co": {
+  "w100px": 780
+ },
+ "phpc.social": {
+  "w100px": 660
+ },
+ "primarycare.app": {
+  "w100px": 900
+ },
+ "ravenation.club": {
+  "w100px": 900
+ },
+ "seo.chat": {
+  "w100px": 480
+ },
+ "sfba.social": {
+  "w100px": 660
+ },
+ "socel.net": {
+  "w100px": 540
+ },
+ "social.bau-ha.us": {
+  "w100px": 960
+ },
+ "social.coop": {
+  "w100px": 660
+ },
+ "social.linux.pizza": {
+  "w100px": 1080
+ },
+ "social.vivaldi.net": {
+  "w100px": 1080
+ },
+ "techhub.social": {
+  "w100px": 840
+ },
+ "theblower.au": {
+  "w100px": 720
+ },
+ "tilde.zone": {
+  "w100px": 600
+ },
+ "toolsforthought.rocks": {
+  "w100px": 1260
+ },
+ "toot.funami.tech": {
+  "w100px": 960
+ },
+ "toot.site": {
+  "w100px": 540
+ },
+ "toot.wales": {
+  "w100px": 600
+ },
+ "uiuxdev.social": {
+  "w100px": 840
+ },
+ "union.place": {
+  "w100px": 660
+ },
+ "universeodon.com": {
+  "w100px": 960
+ },
+ "urbanists.social": {
+  "w100px": 960
+ }
+}

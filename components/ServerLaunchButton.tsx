@@ -1,27 +1,13 @@
-import * as canvas from "https://deno.land/x/canvas@v1.4.1/mod.ts";
-
 interface ServerLaunchButtonProps {
   label: string;
+  w100px: number;
   // href: string;
   /** Value to post with */
   value: string;
+  autoSize?: boolean;
 }
 
-const ctxOnce = (() => {
-  const emuCanvas = canvas.createCanvas(200, 200);
-  const ctx = emuCanvas.getContext("2d");
-  ctx.font = "bold 100px Arial";
-  return ctx;
-})();
-
-function chooseFontSize(options: { text: string }) {
-  const textMetrics = ctxOnce.measureText(options.text);
-  const measured = {
-    width: textMetrics.width,
-    height:
-      textMetrics.actualBoundingBoxAscent +
-      textMetrics.actualBoundingBoxDescent,
-  };
+function chooseFontSize(widthOfArialBoldAt100px: number) {
   // Example: width: 1920px -> 9px
   // Example: width: 720px -> 23px
   // Example: width: > 540px -> 26px
@@ -30,10 +16,9 @@ function chooseFontSize(options: { text: string }) {
   // const heightR = measured.height / options.maxHeight;
   const maximumFontSize = 26;
   const minMeasuredWidth = 540;
-  if (measured.width < minMeasuredWidth) return maximumFontSize;
-  return Math.min(24, (150 / measured.width) * 100);
+  if (widthOfArialBoldAt100px < minMeasuredWidth) return maximumFontSize;
+  return Math.min(24, (150 / widthOfArialBoldAt100px) * 100);
 }
-
 // function mapRange(value: number, low: number, high: number, lowTo: number, highTo: number) {
 //   return lowTo + (highTo - lowTo) * (value - low) / (high - low);
 // }
@@ -48,13 +33,13 @@ export default function ServerLaunchButton(props: ServerLaunchButtonProps) {
       // rel="noreferrer"
       style={{
         fontFamily: "Arial",
-        fontSize: chooseFontSize({
-          text: props.label,
-        }),
+        fontSize: chooseFontSize(props.w100px),
       }}
     >
       <input name="value" type="hidden" value={props.value} />
-      <button type="submit" class="absolute inset-0">{props.label}</button>
+      <button type="submit" class={props.autoSize ? "h-full" : "absolute inset-0"}>
+        {props.label}
+      </button>
     </form>
   );
 }

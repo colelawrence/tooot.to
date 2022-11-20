@@ -169,5 +169,25 @@
     "https://esm.sh/v99/twind@0.16.17/deno/twind.js": "8fec4504ce1bb9a4876b4420826e6c3c49e68493f2723483aad09ea240aa0850",
     "https://esm.sh/v99/twind@0.16.17/sheets/sheets.d.ts": "795aa19124fe8a61cf0f3833aac4d30c63273ca049bd91f010565c9e1c9225a3",
     "https://esm.sh/v99/twind@0.16.17/twind.d.ts": "168e8aeafcf13cfa02fbdd6fd2c1cc374784af6ddbf3c0e07db0b4199c4bf5f6"
+  },
+  "npm": {
+    "specifiers": { "@squoosh/lib": "@squoosh/lib@0.4.0" },
+    "packages": {
+      "@squoosh/lib@0.4.0": {
+        "integrity": "sha512-O1LyugWLZjMI4JZeZMA5vzfhfPjfMZXH5/HmVkRagP8B70wH3uoR7tjxfGNdSavey357MwL8YJDxbGwBBdHp7Q==",
+        "dependencies": {
+          "wasm-feature-detect": "wasm-feature-detect@1.3.0",
+          "web-streams-polyfill": "web-streams-polyfill@3.2.1"
+        }
+      },
+      "wasm-feature-detect@1.3.0": {
+        "integrity": "sha512-w9datO3OReMouWgKOelvu1CozmLK/VbkXOtlzNTanBJpR0uBHyUwS3EYdXf5vBPoHKYS0lpuYo91rpqMNIZM9g==",
+        "dependencies": {}
+      },
+      "web-streams-polyfill@3.2.1": {
+        "integrity": "sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==",
+        "dependencies": {}
+      }
+    }
   }
 }

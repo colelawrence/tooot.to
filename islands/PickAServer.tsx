@@ -3,6 +3,7 @@ import servers from "../SERVERS.gen.json" assert { type: "json" };
 
 interface PickAServerProps {
   cta?: string;
+  customServerFormCTA: string;
   previousServerUsed?: string | undefined;
   recommendedServers: string[];
 }
@@ -13,7 +14,17 @@ export default function PickAServer(props: PickAServerProps) {
       <h3 class="font-bold text-base">{props.cta ?? "Open in your server"}</h3>
       {props.previousServerUsed ? (
         <div>
-          {launchButtonContainerJSX(props, props.previousServerUsed)}
+          {launchButtonContainerJSX(
+            props,
+            {
+              host: props.previousServerUsed,
+              w100px:
+                (servers as Record<string, typeof servers["convo.casa"]>)[
+                  props.previousServerUsed
+                ]?.w100px ?? 900,
+            },
+            true
+          )}
           <details>
             <summary class="font-bold text-base">Other common servers</summary>
             {bigListOfServers(props)}
@@ -35,15 +46,20 @@ function bigListOfServers(props: PickAServerProps) {
           fontSize: `0px`,
         }}
       >
-        {servers.map((s) => launchButtonContainerJSX(props, s))}
+        {Object.entries(servers).map((s) =>
+          launchButtonContainerJSX(props, { host: s[0], w100px: s[1].w100px })
+        )}
       </div>
       <h3 class="font-bold text-base">Other</h3>
-      {serverLaunchCustomInput({ value: props.previousServerUsed ?? "" })}
+      {serverLaunchCustomInput({
+        value: props.previousServerUsed ?? "",
+        cta: props.customServerFormCTA,
+      })}
     </div>
   );
 }
 
-function serverLaunchCustomInput(props: { value: string }) {
+function serverLaunchCustomInput(props: { value: string; cta: string }) {
   return (
     <form
       method="POST"
@@ -57,25 +73,34 @@ function serverLaunchCustomInput(props: { value: string }) {
         class="p-1 w-full"
       />
       <button type="submit" class="uppercase text-sm p-4">
-        Save
+        {props.cta}
       </button>
     </form>
   );
 }
 
-function launchButtonContainerJSX(props: PickAServerProps, s: string) {
+function launchButtonContainerJSX(
+  props: PickAServerProps,
+  s: { host: string; w100px: number },
+  autoSize?: boolean
+) {
   return (
     <div
-      class="w-1/2 h-14 p-1 inline-block rounded-md"
+      class={
+        "h-14 p-1 inline-block rounded-md " +
+        (autoSize ? "max-w-full" : "w-1/2")
+      }
       style={{
         backgroundColor:
-          props.previousServerUsed === s ? "dodgerblue" : undefined,
+          props.previousServerUsed === s.host ? "dodgerblue" : undefined,
       }}
     >
       <ServerLaunchButton
         // href={"https://" + s + "/web/" + props.destination}
-        value={s}
-        label={s}
+        value={s.host}
+        label={s.host}
+        w100px={s.w100px}
+        autoSize={autoSize}
         key={s}
       />
     </div>

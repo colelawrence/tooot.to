@@ -1,29 +1,23 @@
 import { PageProps } from "$fresh/server.ts";
 import PickAServer from "../islands/PickAServer.tsx";
 import { HandlerContext, Handlers } from "$fresh/server.ts";
-import { getCookies } from "https://deno.land/std@0.165.0/http/cookie.ts";
-import { setPrefCookie } from "./setPrefCookie.tsx";
-import { isProbablyServerName } from "./isProbablyServerName.tsx";
+import { setPrefCookie } from "../shared/setPrefCookie.tsx";
+import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
+import { getToootCookies } from "../shared/getToootCookies.tsx";
 
 type RenderData = {
   preferredServer?: string | undefined;
   recommendedServers: string[];
 };
 
-type MaybeCookies = {
-  Pref: string | undefined;
-  [other: string]: string | undefined;
-};
 
 // Consider how to share this code with [name].tsx
 export const handler: Handlers = {
   async GET(_req: Request, ctx: HandlerContext) {
-    const cookies = getCookies(_req.headers) as MaybeCookies;
+    const cookies = getToootCookies(_req.headers);
 
     const renderData: RenderData = {
-      preferredServer: isProbablyServerName(cookies.Pref)
-        ? cookies.Pref
-        : undefined,
+      preferredServer: cookies.preferredServer,
       recommendedServers: [],
     };
 
@@ -71,6 +65,7 @@ export default function Handoff(props: PageProps<RenderData>) {
             cta="Choose your default server"
             recommendedServers={props.data.recommendedServers}
             previousServerUsed={props.data.preferredServer}
+            customServerFormCTA="Save"
           />
         </div>
       </div>
