@@ -7,7 +7,7 @@ export const handler: ErrorHandler = (req, ctx) => {
   console.log({ origin, attemptingToGoTo });
 
   // clean up
-  attemptingToGoTo = attemptingToGoTo.replace(/^https?:\/\/[^\/? ]+\/web\/(@.+)/, '$1')
+  attemptingToGoTo = attemptingToGoTo.replace(/^https?:\/\/[^\/? ]+\/web\/(@.+\/)/, '$1')
 
   for (const redir of REDIRECTORS) {
     const groups = redir.exec(attemptingToGoTo)?.groups;
@@ -39,6 +39,7 @@ interface MatcherLike {
 
 const REDIRECTORS: MatcherLike[] = [
   /^https?:\/\/(?<host>[^\/? ]+)\/@(?<user>[^\/? ]+)(?:\/(?<item>[^\/?\s]+))?$/i,
+  /^https?:\/\/(?<host>[^\/? ]+)\/web\/@(?<user>[^\/? ]+)(?:\/(?<item>[^\/@\s][^\/?\s]+))?$/i,
   /^@?(?<host>(?:\w+\.)+(?:\w+))@(?<user>[^\/? \.]+)(?:\/(?<item>[^\/?\s]+))?$/i,
   /^@?(?<user>[^\/? ]+)@(?<host>[^\/? ]+)(?:\/(?<item>[^\/?\s]+))?$/i,
 ];
