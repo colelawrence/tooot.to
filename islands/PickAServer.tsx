@@ -10,7 +10,7 @@ interface PickAServerProps {
 export default function PickAServer(props: PickAServerProps) {
   return (
     <div class="flex flex-col gap-2">
-      <h3 class="font-bold text-base">{props.cta ?? "Open in"}</h3>
+      <h3 class="font-bold text-base">{props.cta ?? "Open in your server"}</h3>
       {props.previousServerUsed ? (
         <div>
           {launchButtonContainerJSX(props, props.previousServerUsed)}
