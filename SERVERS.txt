@@ -1,6 +1,6 @@
-awscommunity.social
 cloud-native.social
 computerfairi.es
+convo.casa
 corteximplant.com
 creators.social
 discuss.systems
