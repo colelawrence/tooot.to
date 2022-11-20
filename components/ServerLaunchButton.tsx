@@ -27,7 +27,7 @@ export default function ServerLaunchButton(props: ServerLaunchButtonProps) {
   return (
     <form
       method="POST"
-      class="flex px-1 h-12 items-center justify-center bg-white rounded-sm border border-black relative"
+      class="flex px-1 h-12 items-center justify-center bg-white hover:bg-gray-50 rounded-sm border border-gray-700 relative"
       // // Improve privacy by not including info from where we're coming from
       // // https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer
       // rel="noreferrer"

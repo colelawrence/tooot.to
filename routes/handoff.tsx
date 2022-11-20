@@ -4,6 +4,7 @@ import { HandlerContext, Handlers } from "$fresh/server.ts";
 import { setPrefCookie } from "../shared/setPrefCookie.tsx";
 import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
 import { getToootCookies } from "../shared/getToootCookies.tsx";
+import { Footer } from "../components/Footer.tsx";
 // import { ImagePool } from "npm:@squoosh/lib"
 
 // const pool = new ImagePool(1)
@@ -70,7 +71,7 @@ export const handler: Handlers = {
 };
 
 export default function Handoff(props: PageProps<RenderData>) {
-  console.log(props.params)
+  console.log(props.params);
   const { user, hostAndItem } = props.params;
   const [host, ...item] = hostAndItem.split("/");
 
@@ -96,6 +97,7 @@ export default function Handoff(props: PageProps<RenderData>) {
           />
         </div>
       </div>
+      <Footer sendMeFeedbackURL={props.url.origin + "/@colel@hachyderm.io"} />
     </div>
   );
 }

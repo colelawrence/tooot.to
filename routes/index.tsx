@@ -4,12 +4,12 @@ import { HandlerContext, Handlers } from "$fresh/server.ts";
 import { setPrefCookie } from "../shared/setPrefCookie.tsx";
 import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
 import { getToootCookies } from "../shared/getToootCookies.tsx";
+import { Footer } from "../components/Footer.tsx";
 
 type RenderData = {
   preferredServer?: string | undefined;
   recommendedServers: string[];
 };
-
 
 // Consider how to share this code with [name].tsx
 export const handler: Handlers = {
@@ -60,7 +60,18 @@ export default function Handoff(props: PageProps<RenderData>) {
         </p>
       </div>
       <div class="flex flex-col gap-10">
-        <div class="relative w-80">
+        <div class="relative w-80 flex flex-col gap-4">
+          {props.data.preferredServer && (
+            <div>
+              <h3 class="font-bold text-base">Open your server</h3>
+              <a
+                href={`https://${props.data.preferredServer}`}
+                className="p-2 block border rounded border-blue-400 hover:bg-gray-50"
+              >
+                {props.data.preferredServer}
+              </a>
+            </div>
+          )}
           <PickAServer
             cta="Choose your default server"
             recommendedServers={props.data.recommendedServers}
@@ -69,6 +80,7 @@ export default function Handoff(props: PageProps<RenderData>) {
           />
         </div>
       </div>
+      <Footer sendMeFeedbackURL={props.url.origin + "/@colel@hachyderm.io"} />
     </div>
   );
 }

@@ -86,14 +86,11 @@ function launchButtonContainerJSX(
 ) {
   return (
     <div
-      class={
-        "h-14 p-1 inline-block rounded-md " +
-        (autoSize ? "max-w-full" : "w-1/2")
-      }
-      style={{
-        backgroundColor:
-          props.previousServerUsed === s.host ? "dodgerblue" : undefined,
-      }}
+      class={[
+        "h-14 p-1 inline-block rounded-md",
+        autoSize ? "max-w-full" : "w-1/2",
+        props.previousServerUsed === s.host ? "bg-blue-400" : "bg-transparent",
+      ].join(" ")}
     >
       <ServerLaunchButton
         // href={"https://" + s + "/web/" + props.destination}
