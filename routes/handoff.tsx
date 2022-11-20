@@ -75,9 +75,13 @@ export default function Handoff(props: PageProps<RenderData>) {
   const { user, hostAndItem } = props.params;
   const [host, ...item] = hostAndItem.split("/");
 
+  let originServerHref = `https://${host}/@${user}`;
+
   let to = `${user}${host}`;
   if (item.length) {
-    to += `/${item.join("/")}`;
+    const itemPart = `/${item.join("/")}`;
+    to += itemPart;
+    originServerHref += itemPart;
   }
 
   return (
@@ -88,8 +92,16 @@ export default function Handoff(props: PageProps<RenderData>) {
           src={createQRCodePNG({ url: props.url.toString() })}
           alt="QR Code to this page"
         /> */}
-        <div class="p-2 bg-gray-100">{to}</div>
-        <div class="relative w-80">
+        <div class="flex flex-col">
+          <div class="p-2 bg-gray-100 text-lg">{to}</div>
+          <a
+            href={originServerHref}
+            class="p-2 text-gray-600 text-sm block border rounded border-orange-400 hover:bg-gray-50"
+          >
+            Open in {host.slice(1)}
+          </a>
+        </div>
+        <div class="relative w-80 flex flex-col gap-4">
           <PickAServer
             recommendedServers={props.data.recommendedServers}
             previousServerUsed={props.data.preferredServer}
