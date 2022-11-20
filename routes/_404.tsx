@@ -3,8 +3,12 @@ import { HandlerContext, Handlers, ErrorHandler } from "$fresh/server.ts";
 export const handler: ErrorHandler = (req, ctx) => {
   const urlInSlashes = req.url.split("/");
   const origin = urlInSlashes.slice(0, 3).join("/");
-  const attemptingToGoTo = urlInSlashes.slice(3).join("/");
+  let attemptingToGoTo = urlInSlashes.slice(3).join("/");
   console.log({ origin, attemptingToGoTo });
+
+  // clean up
+  attemptingToGoTo = attemptingToGoTo.replace(/^https?:\/\/[^\/? ]+\/web\/(@.+)/, '$1')
+
   for (const redir of REDIRECTORS) {
     const groups = redir.exec(attemptingToGoTo)?.groups;
     if (groups && groups.host && groups.user) {
