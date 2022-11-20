@@ -68,7 +68,7 @@ export const handler: Handlers = {
 };
 
 export default function Handoff(props: PageProps<RenderData>) {
-  const to = props.params.name;
+  const to = props.params.path;
 
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
