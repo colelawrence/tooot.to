@@ -5,8 +5,9 @@ export const handler: ErrorHandler = (req, ctx) => {
   const origin = urlInSlashes.slice(0, 3).join("/");
   let attemptingToGoTo = urlInSlashes.slice(3).join("/");
   // clean up
-  attemptingToGoTo = attemptingToGoTo.replace(/^https?:\/\/[^\/? ]+\/web\/(@.+)/, '$1')
-  
+  attemptingToGoTo = attemptingToGoTo
+    .replace(/^https?:\/\/(?:[^\/? ]+\/web|tooot\.to)\/(@.+)/, "$1")
+
   for (const redir of REDIRECTORS) {
     const groups = redir.exec(attemptingToGoTo)?.groups;
     if (groups && groups.host && groups.user) {
