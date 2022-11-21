@@ -60,6 +60,10 @@ export default function Index(props: PageProps<RenderData>) {
             @colel@hachyderm.io
           </a>
           .
+          <details>
+            <summary>Huh?</summary>
+            <div class="text-sm">{moreInfoJSX()}</div>
+          </details>
         </p>
       </div>
       <div class="flex flex-col gap-10">
@@ -84,6 +88,90 @@ export default function Index(props: PageProps<RenderData>) {
         </div>
       </div>
       <Footer sendMeFeedbackURL={props.url.origin + "/@colel@hachyderm.io"} />
+    </div>
+  );
+}
+
+function moreInfoJSX() {
+  return (
+    <div class="more-info">
+      <p>
+        Until the devs add it directly to Mastodon, I created tooot.to to make
+        it easier to link from websites outside of Mastodon into your Mastodon
+        instance. You can put <code>tooot.to/</code> before any profile URL in
+        the wild and it will let you click through to your own server more
+        easily. e.g.{" "}
+        <a
+          class="text-blue-500 break-all"
+          href="https://tooot.to/https://mastodon.social/web/@TodePond"
+        >
+          <span class="text-green-500">tooot.to/</span>
+          https://mastodon.social/web/@TodePond
+        </a>{" "}
+        or{" "}
+        <a
+          class="text-blue-500 break-all"
+          href="https://tooot.to/https://hachyderm.io/web/@computerfact@botsin.space"
+        >
+          <span class="text-green-500">tooot.to/</span>
+          https://hachyderm.io/web/@computerfact@botsin.space
+        </a>
+        .
+      </p>
+      <p>
+        As well, you can share a <code>tooot.to</code> URL of any profile handle
+        so it&#39;s easier for others coming from other sites. e.g. I&#39;m at{" "}
+        <a class="text-blue-500" href="https://tooot.to/@colel@hachyderm.io">
+          <span class="text-green-500">tooot.to/</span>@colel@hachyderm.io
+        </a>
+      </p>
+      <p>
+        <strong>Features</strong>
+      </p>
+      <ul class="list-disc pl-2">
+        <li>
+          Prefix <span class="text-green-500">tooot.to/</span> redirections:
+          <ul class="list-disc pl-2">
+            <li>
+              From handles:{" "}
+              <a
+                class="text-blue-500"
+                href="https://tooot.to/@colel@hachderm.io"
+              >
+                <code>@colel@hachderm.io</code>
+              </a>
+            </li>
+            <li>
+              From mispelled handles:{" "}
+              <a
+                class="text-blue-500"
+                href="https://tooot.to/@colel@hachderm.io"
+              >
+                <code>colel@hachderm.io</code>
+              </a>{" "}
+              or
+              <a
+                class="text-blue-500"
+                href="https://tooot.to/@colel@hachderm.io"
+              >
+                <code>hachderm.io@colel</code>
+              </a>
+            </li>
+            <li>
+              From your logged in /web/ URLs:{" "}
+              <a
+                class="text-blue-500"
+                href="https://tooot.to/https://hachderm.io/web/@colel"
+              >
+                <code>https://hachderm.io/web/@colel</code>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>QR Code generation for easy IRL sharing</li>
+        <li>Local HTTP only cookie for preferred instance</li>
+        <li>No JavaScript necessary to use</li>
+      </ul>
     </div>
   );
 }

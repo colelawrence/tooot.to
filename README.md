@@ -24,7 +24,6 @@ others coming from other sites. e.g. I'm at https://tooot.to/@colel@hachyderm.io
 - QR Code generation for easy IRL sharing
 - Local HTTP only cookie for preferred instance
 - No JavaScript necessary to use
-- No JavaScript necessary to use
 
 ### Usage
 
