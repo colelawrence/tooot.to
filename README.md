@@ -1,4 +1,30 @@
-# fresh project
+# tooot.to
+
+Until the devs add it directly to Mastodon, I created tooot.to to make it easier
+to link from websites outside of Mastodon into your Mastodon instance. You can
+put `tooot.to/` before any profile URL in the wild and it will let you click
+through to your own server more easily. e.g.
+https://tooot.to/https://mastodon.social/web/@TodePond or
+https://tooot.to/https://hachyderm.io/web/@computerfact@botsin.space
+
+As well, you can share a `tooot.to` URL of any profile handle so it's easier for
+others coming from other sites. e.g. I'm at https://tooot.to/@colel@hachyderm.io
+
+![QR Code feature](docs/feature-qr-code.png)
+
+**Features**
+
+- Prefix `tooot.to/` Redirections
+  - From handles: [`@colel@hachderm.io`](https://tooot.to/@colel@hachderm.io)
+  - From mispelled handles:
+    [`colel@hachderm.io`](https://tooot.to/@colel@hachderm.io) or
+    [`hachderm.io@colel`](https://tooot.to/@colel@hachderm.io)
+  - From your logged in /web/ URLs:
+    [`https://hachderm.io/web/@colel`](https://tooot.to/https://hachderm.io/web/@colel)
+- QR Code generation for easy IRL sharing
+- Local HTTP only cookie for preferred instance
+- No JavaScript necessary to use
+- No JavaScript necessary to use
 
 ### Usage
 
