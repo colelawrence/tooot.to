@@ -149,7 +149,7 @@ function moreInfoJSX() {
               >
                 <code>colel@hachderm.io</code>
               </a>{" "}
-              or
+              or{" "}
               <a
                 class="text-blue-500"
                 href="https://tooot.to/@colel@hachderm.io"
