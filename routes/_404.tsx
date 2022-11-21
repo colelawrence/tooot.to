@@ -1,12 +1,24 @@
-import { HandlerContext, Handlers, ErrorHandler } from "$fresh/server.ts";
+import { ErrorHandler } from "$fresh/server.ts";
 
 export const handler: ErrorHandler = (req, ctx) => {
   const urlInSlashes = req.url.split("/");
   const origin = urlInSlashes.slice(0, 3).join("/");
   let attemptingToGoTo = urlInSlashes.slice(3).join("/");
+
+  attemptingToGoTo = attemptingToGoTo.replace(
+    /^https?:\/\/tooot\.to\//,
+    ''
+  );
+
   // clean up
-  attemptingToGoTo = attemptingToGoTo
-    .replace(/^https?:\/\/(?:[^\/? ]+\/web|tooot\.to)\/(@.+)/, "$1")
+  if (/\/web\/@[^@]+$/.test(attemptingToGoTo)) {
+    // local web/ address should be passed on...
+  } else {
+    attemptingToGoTo = attemptingToGoTo.replace(
+      /^https?:\/\/(?:[^\/? ]+\/web)\/(@.+)/,
+      "$1"
+    );
+  }
 
   for (const redir of REDIRECTORS) {
     const groups = redir.exec(attemptingToGoTo)?.groups;
