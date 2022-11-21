@@ -25,7 +25,7 @@ export const handler: ErrorHandler = (req, ctx) => {
     }
   }
 
-  console.log({ name: "404", orig: attemptingToGoTo });
+  console.error({ name: "404", orig: attemptingToGoTo });
   return new Response(null, { status: 404 });
 };
 
