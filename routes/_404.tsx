@@ -4,11 +4,9 @@ export const handler: ErrorHandler = (req, ctx) => {
   const urlInSlashes = req.url.split("/");
   const origin = urlInSlashes.slice(0, 3).join("/");
   let attemptingToGoTo = urlInSlashes.slice(3).join("/");
-  console.log({ origin, attemptingToGoTo });
-
   // clean up
-  attemptingToGoTo = attemptingToGoTo.replace(/^https?:\/\/[^\/? ]+\/web\/(@.+\/)/, '$1')
-
+  attemptingToGoTo = attemptingToGoTo.replace(/^https?:\/\/[^\/? ]+\/web\/(@.+)/, '$1')
+  
   for (const redir of REDIRECTORS) {
     const groups = redir.exec(attemptingToGoTo)?.groups;
     if (groups && groups.host && groups.user) {
@@ -17,6 +15,7 @@ export const handler: ErrorHandler = (req, ctx) => {
       if (groups.item) {
         Location += `/${groups.item}`;
       }
+      console.log({ name: "redirect", orig: attemptingToGoTo, dest: groups });
       return new Response(null, {
         status: 302,
         headers: {
@@ -25,6 +24,8 @@ export const handler: ErrorHandler = (req, ctx) => {
       });
     }
   }
+
+  console.log({ name: "404", orig: attemptingToGoTo });
   return new Response(null, { status: 404 });
 };
 
@@ -38,8 +39,8 @@ interface MatcherLike {
 }
 
 const REDIRECTORS: MatcherLike[] = [
-  /^https?:\/\/(?<host>[^\/? ]+)\/@(?<user>[^\/? ]+)(?:\/(?<item>[^\/?\s]+))?$/i,
-  /^https?:\/\/(?<host>[^\/? ]+)\/web\/@(?<user>[^\/? ]+)(?:\/(?<item>[^\/@\s][^\/?\s]+))?$/i,
-  /^@?(?<host>(?:\w+\.)+(?:\w+))@(?<user>[^\/? \.]+)(?:\/(?<item>[^\/?\s]+))?$/i,
-  /^@?(?<user>[^\/? ]+)@(?<host>[^\/? ]+)(?:\/(?<item>[^\/?\s]+))?$/i,
+  /^https?:\/\/(?<host>[^\/? ]+)\/@(?<user>[^\/? @]+)(?:\/(?<item>[^\/?\s]+))?$/i,
+  /^https?:\/\/(?<host>[^\/? ]+)\/web\/@(?<user>[^\/? @]+)(?:\/(?<item>[^\/@\s][^\/?@\s]+))?$/i,
+  /^@?(?<host>(?:\w+\.)+(?:\w+))@(?<user>[^\/? \.]+)(?:\/(?<item>[^\/?@\s]+))?$/i,
+  /^@?(?<user>[^\/@? ]+)@(?<host>[^\/@? ]+)(?:\/(?<item>[^\/?@\s]+))?$/i,
 ];
