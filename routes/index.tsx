@@ -36,6 +36,7 @@ export const handler: Handlers = {
     });
     if (isProbablyServerName(value)) {
       setPrefCookie(headers, value);
+      console.log({ name: "saved-pref", pref: value });
     }
     return new Response(null, {
       status: 302,
@@ -44,11 +45,13 @@ export const handler: Handlers = {
   },
 };
 
-export default function Handoff(props: PageProps<RenderData>) {
+export default function Index(props: PageProps<RenderData>) {
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
       <div>
-        <h1 class="text-black text-4xl font-bold">Tooot.to</h1>
+        <a class="text-black text-4xl font-bold" href={props.url.origin}>
+          Tooot.to
+        </a>
         <p class="mt-2">
           Tooot.to helps you link to things on your own server made by{" "}
           <a

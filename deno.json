@@ -1,6 +1,8 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=static/,routes/ dev.ts"
+    "start": "deno run -A --watch=static/,routes/,shared/ dev.ts",
+    "wasmbuild": "deno run -A https://deno.land/x/wasmbuild@0.8.5/main.ts",
+    "wasmbuild:watch": "deno run --watch=rs_lib/src -A https://deno.land/x/wasmbuild@0.8.5/main.ts"
   },
   "importMap": "./import_map.json",
   "compilerOptions": {
