@@ -17,6 +17,8 @@ export const handler: Handlers = {
 
     const pngData = (await rs).generate_qr_code(toootURL);
 
+    console.log({ name: "generate-qr", to: toLabel })
+
     return new Response(pngData, {
       status: 200,
       headers: {
