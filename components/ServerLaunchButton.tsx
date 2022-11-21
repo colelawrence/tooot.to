@@ -1,4 +1,5 @@
 interface ServerLaunchButtonProps {
+  isCta?: boolean;
   label: string;
   w100px: number;
   // href: string;
@@ -24,21 +25,31 @@ function chooseFontSize(widthOfArialBoldAt100px: number) {
 // }
 
 export default function ServerLaunchButton(props: ServerLaunchButtonProps) {
+  
   return (
     <form
       method="POST"
-      class="flex px-1 h-12 items-center justify-center bg-white hover:bg-gray-50 rounded-sm border border-gray-700 relative"
       // // Improve privacy by not including info from where we're coming from
       // // https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noreferrer
       // rel="noreferrer"
+      class="h-12 items-center justify-center relative"
       style={{
         fontFamily: "Arial",
         fontSize: chooseFontSize(props.w100px),
       }}
     >
       <input name="value" type="hidden" value={props.value} />
-      <button type="submit" class={props.autoSize ? "h-full" : "absolute inset-0"}>
-        {props.label}
+      <button type="submit"
+        class={`
+          ${props.autoSize ? 'h-full' : 'absolute inset-0 w-full'}
+          ${props.isCta ? 'bg-indigo-500 text-white border-indigo-700 hover:bg-indigo-600' : 'text-indigo-500 border-indigo-500 hover:bg-gray-100'}
+          p-2 leading-snug block border rounded grid gap-1
+        `}
+      >
+        <div class="flex items-center">{props.label}</div>
+        {/* { props.autoSize && 
+          <svg width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 12h12.5m0 0l-6-6m6 6l-6 6"/></svg>
+        } */}
       </button>
     </form>
   );

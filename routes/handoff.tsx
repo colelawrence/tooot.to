@@ -5,6 +5,7 @@ import { setPrefCookie } from "../shared/setPrefCookie.tsx";
 import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
 import { getToootCookies } from "../shared/getToootCookies.tsx";
 import { Footer } from "../components/Footer.tsx";
+import { ServerLaunchLink } from "../components/ServerLaunchLink.tsx";
 // import { ImagePool } from "npm:@squoosh/lib"
 
 // const pool = new ImagePool(1)
@@ -93,13 +94,16 @@ export default function Handoff(props: PageProps<RenderData>) {
           alt="QR Code to this page"
         /> */}
         <div class="flex flex-col">
-          <div class="p-2 bg-gray-100 text-lg">{to}</div>
-          <a
+          <div class="p-2 bg-gray-100 text-lg mb-6">{to}</div>
+
+          <h3 class="font-bold text-base mb-1">Open in {user}'s server</h3>
+          <ServerLaunchLink host={host} user={user} />
+          {/* <a
             href={originServerHref}
             class="p-2 text-gray-600 text-sm block border rounded border-orange-400 hover:bg-gray-50"
           >
             Open in {host.slice(1)}
-          </a>
+          </a> */}
         </div>
         <div class="relative w-80 flex flex-col gap-4">
           <PickAServer
