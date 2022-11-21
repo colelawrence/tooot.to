@@ -75,7 +75,7 @@ export default function Handoff(props: PageProps<RenderData>) {
   const { user, hostAndItem } = props.params;
   const [host, ...item] = hostAndItem.split("/");
 
-  let originServerHref = `https://${host}/@${user}`;
+  let originServerHref = `https://${host}/${user}`;
 
   let to = `${user}${host}`;
   if (item.length) {
