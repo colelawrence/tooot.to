@@ -117,6 +117,8 @@ export const handler: Handlers = {
 };
 
 export default function Handoff({ data, url }: PageProps<RenderData>) {
+  const user = data.toLabel.replace(`@${data.originServerLabel}`, '')
+
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
       <div>
@@ -137,16 +139,8 @@ export default function Handoff({ data, url }: PageProps<RenderData>) {
               {qrCodeJSX(data)}
             </div>
           </div>
-          <a
-            href={data.originServerHref}
-            class="p-2 text-gray-600 text-sm block border rounded border-orange-400 hover:bg-gray-50"
-          >
-            Open in {data.originServerLabel}
-          </a>
-          <div class="p-2 bg-gray-100 text-lg mb-6">{to}</div>
-
-          <h3 class="font-bold text-base mb-1">Open in {user}'s server</h3>
-          <ServerLaunchLink host={host} user={user} />
+          <h3 class="font-bold text-base mb-1 mt-3">Open in {user}'s server</h3>
+          <ServerLaunchLink host={data.originServerLabel} user={user} />
           {/* <a
             href={originServerHref}
             class="p-2 text-gray-600 text-sm block border rounded border-orange-400 hover:bg-gray-50"
