@@ -9,6 +9,10 @@ export const handler: ErrorHandler = (req, ctx) => {
     /^https?:\/\/tooot\.to\//,
     ''
   );
+  attemptingToGoTo = attemptingToGoTo.replace(
+    /^\/\//,
+    '/'
+  );
 
   // clean up
   if (/\/web\/@[^@]+$/.test(attemptingToGoTo)) {
@@ -52,6 +56,7 @@ interface MatcherLike {
 }
 
 const REDIRECTORS: MatcherLike[] = [
+  /^https?:\/\/(?:[^\/? ]+)\/@(?<user>[^\/? @]+)@(?<host>[-\w\.]+)(?:\/(?<item>[^\/?\s]+))?$/i,
   /^https?:\/\/(?<host>[^\/? ]+)\/@(?<user>[^\/? @]+)(?:\/(?<item>[^\/?\s]+))?$/i,
   /^https?:\/\/(?<host>[^\/? ]+)\/web\/@(?<user>[^\/? @]+)(?:\/(?<item>[^\/@\s][^\/?@\s]+))?$/i,
   /^@?(?<host>(?:\w+\.)+(?:\w+))@(?<user>[^\/? \.]+)(?:\/(?<item>[^\/?@\s]+))?$/i,
