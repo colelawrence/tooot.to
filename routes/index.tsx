@@ -5,6 +5,7 @@ import { setPrefCookie } from "../shared/setPrefCookie.tsx";
 import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
 import { getToootCookies } from "../shared/getToootCookies.tsx";
 import { Footer } from "../components/Footer.tsx";
+import { ServerLaunchLink } from "../components/ServerLaunchLink.tsx";
 
 type RenderData = {
   preferredServer?: string | undefined;
@@ -71,12 +72,7 @@ export default function Index(props: PageProps<RenderData>) {
           {props.data.preferredServer && (
             <div>
               <h3 class="font-bold text-base">Open your server</h3>
-              <a
-                href={`https://${props.data.preferredServer}`}
-                className="p-2 block border rounded border-blue-400 hover:bg-gray-50"
-              >
-                {props.data.preferredServer}
-              </a>
+              <ServerLaunchLink host={props.data.preferredServer} />
             </div>
           )}
           <PickAServer

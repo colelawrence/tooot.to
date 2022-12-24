@@ -6,6 +6,8 @@ import { isProbablyServerName } from "../shared/isProbablyServerName.tsx";
 import { importRsLib } from "../shared/importRsLib.ts";
 import { getToootCookies } from "../shared/getToootCookies.tsx";
 import { Footer } from "../components/Footer.tsx";
+import { ServerLaunchLink } from "../components/ServerLaunchLink.tsx";
+// import { ImagePool } from "npm:@squoosh/lib"
 import { parseUserHostAndItem } from "../shared/parseUserHostAndItem.tsx";
 
 type RenderData = HandoffURLs & {
@@ -115,6 +117,8 @@ export const handler: Handlers = {
 };
 
 export default function Handoff({ data, url }: PageProps<RenderData>) {
+  const user = data.toLabel.replace(`@${data.originServerLabel}`, '')
+
   return (
     <div class="flex flex-col gap-16 px-8 py-16 font-sans max-w-sm mx-auto">
       <div>
@@ -135,12 +139,14 @@ export default function Handoff({ data, url }: PageProps<RenderData>) {
               {qrCodeJSX(data)}
             </div>
           </div>
-          <a
-            href={data.originServerHref}
+          <h3 class="font-bold text-base mb-1 mt-3">Open in {user}'s server</h3>
+          <ServerLaunchLink host={data.originServerLabel} user={user} />
+          {/* <a
+            href={originServerHref}
             class="p-2 text-gray-600 text-sm block border rounded border-orange-400 hover:bg-gray-50"
           >
-            Open in {data.originServerLabel}
-          </a>
+            Open in {host.slice(1)}
+          </a> */}
         </div>
         <div class="relative w-80 flex flex-col gap-4">
           <PickAServer

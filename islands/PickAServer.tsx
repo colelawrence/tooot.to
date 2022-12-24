@@ -10,8 +10,8 @@ interface PickAServerProps {
 
 export default function PickAServer(props: PickAServerProps) {
   return (
-    <div class="flex flex-col gap-2">
-      <h3 class="font-bold text-base">{props.cta ?? "Open in your server"}</h3>
+    <div>
+      <h3 class="font-bold text-base mb-1">{props.cta ?? "Open in your server"}</h3>
       {props.previousServerUsed ? (
         <div>
           {launchButtonContainerJSX(
@@ -25,8 +25,8 @@ export default function PickAServer(props: PickAServerProps) {
             },
             true
           )}
-          <details>
-            <summary class="font-bold text-base">Other common servers</summary>
+          <details class="mt-2">
+            <summary class="font-bold text-base mb-1">Other common servers</summary>
             {bigListOfServers(props)}
           </details>
         </div>
@@ -41,16 +41,13 @@ function bigListOfServers(props: PickAServerProps) {
   return (
     <div>
       <div
-        style={{
-          // fix gaps between inline blocks
-          fontSize: `0px`,
-        }}
+        class="grid grid-cols-2 gap-1"
       >
         {Object.entries(servers).map((s) =>
           launchButtonContainerJSX(props, { host: s[0], w100px: s[1].w100px })
         )}
       </div>
-      <h3 class="font-bold text-base">Other</h3>
+      <h3 class="font-bold text-base mt-2 mb-1">Other</h3>
       {serverLaunchCustomInput({
         value: props.previousServerUsed ?? "",
         cta: props.customServerFormCTA,
@@ -63,7 +60,7 @@ function serverLaunchCustomInput(props: { value: string; cta: string }) {
   return (
     <form
       method="POST"
-      class="flex px-1 h-12 justify-between items-center bg-white rounded-sm border border-black relative"
+      class="flex px-1 h-12 justify-between items-center bg-white rounded border border-black relative"
     >
       <input
         name="value"
@@ -87,13 +84,13 @@ function launchButtonContainerJSX(
   return (
     <div
       class={[
-        "h-14 p-1 inline-block rounded-md",
-        autoSize ? "max-w-full" : "w-1/2",
-        props.previousServerUsed === s.host ? "bg-blue-400" : "bg-transparent",
+        "h-12 inline-block rounded-md",
+        autoSize ? "max-w-full" : '',
       ].join(" ")}
     >
       <ServerLaunchButton
         // href={"https://" + s + "/web/" + props.destination}
+        isCta={props.previousServerUsed === s.host}
         value={s.host}
         label={s.host}
         w100px={s.w100px}
